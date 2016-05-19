@@ -1,0 +1,26 @@
+	
+{
+  "data": [
+    {
+      "question": "How can we improve Personalized learning using MOOCs and Collaboration with peers?",
+      "answer": "Knowledge advancement as a community rather than individual achievement. In personalized learning teachers can get ideas from students and students can get ideas from other students. Knowledge advancement as idea improvement rather than as progress toward true or warranted belief. After analyzing all the threads related to the topics, the person can get a clear picture of the topic."
+    },
+     {
+      "question": "We don't see many courses in vernacular languages despite having software support from Unicode. why?",
+      "answer": "Yes, I agree MOOCs are less expensive than a traditional in-class course. This can be due to various factors such as lesser need of resources (classroom, furniture) in an online course. The current scenario is such that not many courses are in vernacular languages. We can attribute this mainly to the fact that these courses aim at educating a larger section of student community & hence will be in a common global language. Courses in regional languages are yet to be launched as it takes more efforts to provide all resources in these languages"
+    },
+     {
+      "question": "What drived you taking up a course in Mooc? was it social influence or self motivation?",
+      "answer": "My motivation to enroll in a MOOC was mostly self motivation. I wanted to challenge myself this winter break to learn something new in software development. I weighed my options, one of which was an MVC framework. I took the initiative to find a couple different options for learning. I personally don't learn very well out of a book and have watched hours upon hours of KhanAcademy and other videos on Youtube. "
+    },
+     {
+      "question": "I am interested to hear if anyone in this class has had any experience with these kinds of learning games/simulations and if so, what were your experiences (both positive and negative)?",
+      "answer": "i think game could be useful for small age audience(may be till 5th grade or so) as the interest has to be brought to them and also engaging them in an activity is difficult, As we grow we start to emphasis our education towards what we like to learn and a factor like passion is enough as it is by choice. Game could be a distraction and addiction. My nephew in 4th grade plays a video game and i have seen undergraduate college kids play that game as well. This addiction is unnecessary even if it encourages learning."
+    },
+    {
+      "question": "Regarding the key faetures of onilne learning community",
+      "answer": "Surely, plethora of unorganized information in a learning tool can be misleading as well can give user a very bad experience with the system. In my opinion following are the key features:A good search engine : If an user has specific type of course in mind, generally he would like to avoid going through menu and directly search the material. It saves his time. Use tags or keywords :This point complements my previous point as if learning materials are posted with tags if can help the search engine to find the relevant material for the user with more accuracy"
+    }
+  
+  ]
+}
