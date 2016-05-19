@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Home</title>
+	<link rel="stylesheet" href="../css/style.css">
+	<link rel="stylesheet" href="../css/jquery-ui.css">
+	<link rel="stylesheet" href="../css/jquery.timepicker.css">
+	<link rel="stylesheet" href="../css/jquery.dataTables.min.css">
+	<link rel="stylesheet" href="../css/selectivity-full.min.css">
+	<link rel="stylesheet" href="../css/font-awesome-4.4.0/css/font-awesome.min.css">
+
+	<script src="../lib/jquery-2.1.4.min.js"></script>
+	<script src="../lib/jquery-ui.js"></script>
+	<script src="../lib/jquery.timepicker.js"></script>
+	<script src="../lib/selectivity-full.min.js"></script>
+	<script src="/system/sling.js"></script>
+	<script src="../js/main.js"></script>
+	<script type="text/javascript" src="../lib/jquery.dataTables.min.js"></script>
+
+	<script type="text/javascript">
+	$(document).ready(function(){
+		accessControl();
+		$('#username').text(Sling.getSessionInfo().userID);
+		// load events table 
+		loadEventsTable();
+	
+		$("#deleteEventDialog").dialog({
+			autoOpen: false,
+			modal: true,
+			width: 400,
+			height: 200,
+			resizable:false,
+			dialogClass: "dlg-no-close"
+		});
+
+		$("#publishEventDialog").dialog({
+			autoOpen: false,
+			modal: true,
+			width: 410,
+			height: 'auto',
+			position: { my: 'top', at: 'top+70' },
+			dialogClass: "dlg-no-close"
+		});
+	});
+	</script>
+</head>
+<body class="cblack bg-thin-grey">
+	<header class="cwhite bg-black">
+		<div class="container">
+			<nav class="navbar fs20" role="navigation">
+				<div class="left mt15">
+					<a href="home.html" class="logo"><img src="../images/app_icon.png"></a>
+				</div>
+				<div class="center">
+					<h3 class="pl20">Event Administration</h3>
+				</div>
+				<div class="right mt15">
+					<ul>
+                        <li class="left"><span class="box-white"><i class="fa fa-user pr5"></i> <span id="username">Anonymous</span></li>
+                        <li class="left pl20"><a href="https://youtu.be/mwmcjQ5XCT0" target="_blank"class="link cwhite" target="_blank"><i class="fa fa-info-circle pr5"></i>Help</a></li>
+                        <li class="left pl20"><a href="/system/sling/logout.html" class="link cwhite" target="_blank"><i class="fa fa-power-off pr5"></i> Logout</a></li>
+                    </ul>
+				</div>
+            </nav>
+		</div>
+	</header>
+	<div class="container grid">
+		<div id="deleteEventDialog">
+			<div class="header section-title">
+				<span class="msg">Are you sure to delete this event <i class="fa fa-question-circle"></i></span>
+			</div>
+			
+			<div class="footer fx fx-center mt30">
+				<span class="warningText"><i class="fa fa-warning pr5"></i>You can't undo this operation</span>
+			</div>
+
+			<div class="fx submit fx-center mt30">
+				<div class="right pr20">
+					<a class="btn btn-black" onclick="cancelDeleteEvent()" id="cancelDeleteEventBtn"><i class="fa fa-times-circle pr5"></i>Cancel</a>
+				</div>
+				<div class="left">
+					<a class="btn btn-light-blue" onclick="deleteEventAction()" id="deleteEventBtn"><i class="fa fa-trash pr5"></i>Delete</a>
+				</div>
+			</div>
+		</div>
+
+		<div id="publishEventDialog">
+			<div class="header section-title">
+				<span class="msg">Are you sure to publish this event <i class="fa fa-question-circle"></i></span>
+			</div>
+			
+			<div class="footer fx fx-center mt30">
+				<span class="warningText"><i class="fa fa-warning pr5"></i>You can't undo this operation</span>
+			</div>
+
+			<div class="fx submit fx-center mt40 mb30">
+				<div class="right pr20">
+					<a class="btn btn-black" onclick="cancelPublishEvent()" id="cancelDeleteEventBtn"><i class="fa fa-times-circle pr5"></i>Cancel</a>
+				</div>
+				<div class="left">
+					<a class="btn btn-light-blue" onclick="publishEventAction()" id="deleteEventBtn"><i class="fa fa-send-o pr5"></i>Publish</a>
+				</div>
+			</div>
+
+			<div id="upload-progress-container" class="mt30 hide">
+				<ul>
+					<li><span class="pubevent text">Publishing event details...</span></li>
+					<li><span class="pubsession text">Publishing sessions...</span></li>
+					<li><span class="pubsessioncats text">Publishing session categories...</span></li>
+					<li><span class="pubspeakers text">Publishing speakers...</span></li>
+					<li><span class="pubpartners text">Publishing partners/sponsors...</span></li>
+					<li><span class="pubimages text">Publishing event images...</span></li>
+				</ul>
+				<div class="fx fx-center mb20"><a onclick="publishDone()" class="btn btn-light-blue done"><i class="fa fa-check pr5"></i>Done</a></div>
+			</div>
+
+		</div>
+
+
+		<div class="left grid-col col25 mt15">
+			<div id="navcontainer">
+				<ul class="side-nav-links bg-white">
+					<li class="selected fs20">
+						<a href="/IgniteAdmin/design/home.html" class="link capshaltgrey"><i class="fa fa-home pr10"></i>Events</a>
+					</li>
+					<li>
+						<a href="/IgniteAdmin/design/create-speakers.html" class="link capshaltgrey"><i class="fa fa-user pr10"></i>Speakers</a>
+					</li>
+					<li>
+						<a href="/IgniteAdmin/design/create-promotions.html" class="link capshaltgrey"><i class="fa fa-star pr10"></i>Promotions</a>
+					</li>
+					<li>
+						<a href="/IgniteAdmin/design/create-sponsors.html" class="link capshaltgrey"><i class="fa fa-users pr10"></i>Sponsors</a>
+					</li>
+					<li>
+						<a href="/IgniteAdmin/design/create-surveyquestions.html" class="link capshaltgrey"><i class="fa fa-question pr10"></i>Survey Questions</a>
+					</li>
+					<li>
+						<a href="/IgniteAdmin/design/admin-dashboard.html" class="link capshaltgrey"><i class="fa fa-cogs pr10"></i>Admin Dashboard</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="right grid-col col70 mt45">
+			<div class="section-title">
+					<span>All Events</span>
+			</div>
+			<div id="successPlaceholder" class="hide">
+				<i class="fa fa-check pr5" style="color:green"></i><span class="successText">Your event has been deleted successfully</span>
+			</div>
+
+			<div id="errorPlaceholder" class="hide">
+				<i class="fa fa-times-circle pr5" style="color:orangered"></i><span class="errorText">Something went wrong. Contact system admin for more details</span>
+			</div>
+
+			<div id="createEventBtnWrapper" class="right">
+					<a href="create-event.html" class="btn btn-light-blue"><i class="fa fa-plus"></i><span class="pl5">Create Event</span></a>
+			</div>
+			<div id="eventsTableWrapper" class="mb40">
+				<table id="eventsDTable" class="display" width="100%"></table>
+			</div>
+			<!--<div class="fx fx-center mb40">
+				<a href="#" class="btn btn-light-blue"><i class="fa fa-send-o"></i><span class="pl5">Publish Events</span></a>
+			</div>-->
+			<iframe name='submit-iframe' style='display: none;'></iframe>
+			<form id="delete_eventsform" class="hide" method="POST" target="submit-iframe">
+			  <input type="hidden" name=":operation" value="delete">
+			</form>
+
+			<!-- hidden event form -->
+		<form method="POST" id="eventForm" class="event-form hide">
+			<input type="text" id="shortTitle" class="mt15" placeholder="Enter Short Title" name="shortTitle" />
+			<input type="text" id="longTitle" class="mt15" placeholder="Enter Long Title" name="longTitle" />
+			<input type="text" id="shortDesc" class="mt15" placeholder="Describe your event precisely" name="shortDesc" />
+			<textarea id="longDesc" class="mt15" placeholder="Elaborate your event in detail" rows="6" cols="40" name="longDesc"></textarea>
+			<input type="text" class="date" placeholder="Start Date" id="startDate" name="startDate"/>
+			<input type="text" class="time" placeholder="Start Time" id="startTime" name="startTime"/>
+			<input type="text" class="date" placeholder="End Date" id="endDate" name="endDate"/>
+			<input type="text" class="time" placeholder="End Time" id="endTime" name="endTime"/>
+			<input type="text" id="addressText" class="mt15" placeholder="Lookup for location" name="addressText" />
+			<input type="text" id="venue" class="mt15" placeholder="Enter Venue" name="venue" />
+			<input type="text" id="hall" class="mt15" placeholder="Enter Hall/Building Name" name="hall" />
+			<input type="text" id="city" class="mt15" placeholder="Enter city" name="city" />
+			<input type="hidden" id="partnersList" name="partners"/> 
+			<input type="hidden" id="sessionsList" name="sessionIds"/> 
+			<input type="hidden" id="calendarIds" name="calendarIds" value="[]"/>
+			<input type="hidden" id="eventImgBase64" name="imgBase64"/> 
+			<input type="hidden" id="eventImgId" name="image"/>
+			<input type="hidden" id="locationLat" name="locationLat" />
+			<input type="hidden" id="locationLong" name="locationLong" />
+			<input type="hidden" id="eventState" name="eventState"/> 
+		</form>
+		<form id="eventbanner_form" method="POST" enctype="multipart/form-data" class="eventbanner-form hide" target="submit-iframe">
+		</form>
+
+		</div>
+	</div>
+</body>
+</html>

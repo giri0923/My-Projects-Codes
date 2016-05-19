@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Home</title>
+	<link rel="stylesheet" href="../css/style.css">
+	<link rel="stylesheet" href="../css/jquery-ui.css">
+	<link rel="stylesheet" href="../css/jquery.timepicker.css">
+	<link rel="stylesheet" href="../css/jquery.dataTables.min.css">
+	<link rel="stylesheet" href="../css/selectivity-full.min.css">
+	<link rel="stylesheet" href="../css/font-awesome-4.4.0/css/font-awesome.min.css">
+
+	<script src="../lib/jquery-2.1.4.min.js"></script>
+	<script src="../lib/jquery-ui.js"></script>
+	<script src="../lib/jquery.timepicker.js"></script>
+	<script src="../lib/selectivity-full.min.js"></script>
+	<script src="/system/sling.js"></script>
+	<script src="../js/main.js"></script>
+	<script src="../js/connect.js"></script>
+	<script type="text/javascript" src="../lib/jquery.dataTables.min.js"></script>
+
+	<script type="text/javascript">
+	$(document).ready(function(){
+		accessControl();
+		var currentUser = JSON.parse(localStorage.getItem("currentUser"));
+		$('#username').text(currentUser.firstname + " " + currentUser.lastname);
+		loadQuestionDetails();
+		registerPostAnswerBtn();
+		loadAnswersTable();
+	});
+	</script>
+</head>
+<body class="cblack bg-thin-grey">
+	<header class="cwhite bg-black">
+		<div class="container">
+			<nav class="navbar fs20" role="navigation">
+				<div class="left mt15">
+					<a href="home.html" class="logo"><img src="../images/app_icon.png"></a>
+				</div>
+				<div class="center">
+					<h2 class="pl20 pt4">ASU CONNECT</h2>
+				</div>
+				<div class="right mt15">
+					<ul>
+                        <li class="left"><span class="box-white"><i class="fa fa-user pr5"></i> <span id="username">Anonymous</span></li>
+                        <li class="left pl20"><a href="#" target="_blank"class="link cwhite" target="_blank"><i class="fa fa-info-circle pr5"></i>Help</a></li>
+                        <li class="left pl20"><a href="/system/sling/logout.html" class="link cwhite"><i class="fa fa-power-off pr5"></i> Logout</a></li>
+                    </ul>
+				</div>
+            </nav>
+		</div>
+	</header>
+	<div class="container grid">
+
+		<div class="left grid-col col25 mt15">
+			<div id="navcontainer">
+				<ul class="side-nav-links bg-white">
+					<li class="selected fs20">
+						<a href="/ASUConnect/design/prof-home.html" class="link capshaltgrey"><i class="fa fa-home pr10"></i>Home</a>
+					</li>
+					<li>
+						<a href="/ASUConnect/design/student-questions.html" class="link capshaltgrey"><i class="fa fa-question-circle pr10"></i>My Questions</a>
+					</li>
+					<li>
+						<a href="/ASUConnect/design/student-profile.html" class="link capshaltgrey"><i class="fa fa-user pr10"></i>My Profile</a>
+					</li>
+					<li>
+						<a href="/ASUConnect/design/student-settings.html" class="link capshaltgrey"><i class="fa fa-cogs pr10"></i>Settings</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="right grid-col col70">
+			<div id="successPlaceholder" class="hide mt33">
+				<i class="fa fa-check pr5" style="color:green"></i><span class="successText">Your event has been deleted successfully</span>
+			</div>
+
+			<div id="errorPlaceholder" class="hide">
+				<i class="fa fa-times-circle pr5" style="color:orangered"></i><span class="errorText">Something went wrong. Contact system admin for more details</span>
+			</div>
+
+			<div class="steps step1">
+					<div id="questionDetails">
+
+					</div>
+			</div>
+
+			<div id="answersTableWrapper" class="mb40">
+				<table id="answersDTable" class="display" width="100%"></table>
+			</div>
+
+			<div class="steps step1">
+					
+					<form method="POST" id="answerForm" class="answer-form">
+						<div id="answer-details-container" class="bg-thick-grey p20">
+							<div class="body">
+								<textarea id="answer" class="mt15" placeholder="Post your answer" rows="6" cols="40" name="answer"  data-validation="required"></textarea>
+							</div>
+						</div>
+						<!-- Hidden values -->
+						<input type="hidden" id="user" name="user"/>
+						<input type="hidden" id="timestamp" name="timestamp"/>
+					</form> <!-- Answer Form Ends Here -->
+			</div> <!-- Step1 Ends Here-->  
+					<div id="answer-action-links-wrapper" class="mt30">
+						<ul class="fx fx-center mb40">
+							<li class="left pr20"><a id="cancel-answer-link" class="btn btn-black"><i class="fa fa-times-circle pr5"></i>Cancel</a></li>
+							<li class="right"><a id="save-answer-link" class="btn btn-light-blue"><i class="fa fa-check pr5"></i>Post</a></li>
+						</ul>
+					</div>		
+		</div>
+</body>
+</html>

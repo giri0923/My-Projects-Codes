@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>ASU Connect</title>
+    <link rel="stylesheet" href="/ASUConnect/css/login.css">
+    <script src="../lib/jquery-2.1.4.min.js"></script>
+    <script src="/system/sling.js"></script>
+    <script src="../js/login.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function(){
+        registerSignUpBtn();    
+      });
+    </script>
+    <style>
+    .login input[type=button]{
+      width: 260px;
+      height: 35px;
+      background: #fff;
+      border: 1px solid #fff;
+      cursor: pointer;
+      border-radius: 2px;
+      color: #a18d6c;
+      font-family: 'Exo', sans-serif;
+      font-size: 16px;
+      font-weight: 400;
+      padding: 6px;
+      margin-top: 10px;
+     }
+
+     .login input[type=text]{
+        width: 250px;
+        height: 30px;
+        background: transparent;
+        border: 1px solid rgba(255,255,255,0.6);
+        border-radius: 2px;
+        color: #fff;
+        font-family: 'Exo', sans-serif;
+        font-size: 16px;
+        font-weight: 400;
+        padding: 4px;
+        margin-top: 10px;
+      } 
+
+      .li {display:inline}
+
+      #levelList{margin-left: -44px}
+    </style>
+  </head>
+  <body>
+
+    <div class="body"></div>
+    <div class="grad"></div>
+    <div class="header">
+      <div>ASU Connect</div>
+    </div>
+    <br>
+
+    <form id="signupForm">
+       <div class="login">
+        <input type="text" placeholder="firstname" name="firstname">
+        <input type="text" placeholder="lastname" name="lastname">
+        <input type="text" placeholder="username" name="username" id="username"><br>
+        <input type="password" placeholder="password" name="password"><br>
+        <input type="password" placeholder="confirm password" name="confirm_password"><br>
+        <ul id="levelList">
+          <li style="list-style:none;">
+            <input type="radio" name="studlevel" value="Under Graduate" onchange="setStudLevel(1)">Under Graduate
+            <input type="radio" name="studlevel" value="Graduate" onchange="setStudLevel(2)">Graduate          
+            <input type="radio" name="studlevel" value="Ph.D" onchange="setStudLevel(3)">Ph.D
+          </li> 
+        </ul>
+        <input id="signupbtn" type="button" value="Signup">
+        <input type="hidden" name="specialization" id="specialization">
+        <input type="hidden" name="level" id="level">
+      </div>
+    </form>
+
+
+    <form id="loginform" method="POST" action="/j_security_check" enctype="multipart/form-data" accept-charset="UTF-8" style='display: none;' target="submit-iframe">
+
+       <input type="hidden" name="_charset_" value="UTF-8">
+       <input type="hidden" name="resource" value="/ASUConnect/design/login.html">
+
+       <div id="err">
+          <p></p>
+       </div>
+          
+       <div class="login">
+        <input type="text" placeholder="username" name="j_username" value="admin"><br>
+        <input type="password" placeholder="password" name="j_password" value="admin"><br>
+        <input id="loginbtn" type="submit" value="Login">
+       </div>
+
+    </form>
+    
+  <iframe name='submit-iframe' style='display: none;'></iframe>
+
+   </body>
+</html>
