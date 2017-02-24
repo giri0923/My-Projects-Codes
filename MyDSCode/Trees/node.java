@@ -1,9 +1,11 @@
-package Trees;
+package BinaryTree;
 
 public class node {
+	
 
-	int data;
-	node left;
-	node right;
+	public int data;
+	public node next;
+	
+
 
 }
